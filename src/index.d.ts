@@ -12,6 +12,8 @@ export function takePicture(options?: CameraOptions): Promise<imageAsset.ImageAs
 export function requestPermissions(): Promise<any>;
 export function requestCameraPermissions(): Promise<any>;
 export function requestPhotosPermissions(): Promise<any>;
+export function hasCameraPermissions(): Promise<boolean>;
+export function hasPhotosPermissions(): Promise<boolean>;
 
 /**
  * Is the camera available to use

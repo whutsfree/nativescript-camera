@@ -208,6 +208,42 @@ export let requestPermissions = function () {
     });
 };
 
+export let hasCameraPermissions = function () {
+    return new Promise(function (resolve, reject) {
+        let cameraStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo);
+        switch (cameraStatus) {
+            case 0:
+            case 1:
+            case 2: {
+                resolve(false);
+                break;
+            }
+            case 3: {
+                resolve(true);
+                break;
+            }
+        }
+    });
+};
+
+export let hasPhotosPermissions = function () {
+    return new Promise(function (resolve, reject) {
+        let authStatus = PHPhotoLibrary.authorizationStatus();
+        switch (authStatus) {
+            case 0:
+            case 1:
+            case 2: {
+                resolve(false);
+                break;
+            }
+            case 3: {
+                resolve(true);
+                break;
+            }
+        }
+    });
+};
+
 export let requestPhotosPermissions = function () {
     return new Promise(function (resolve, reject) {
         let authStatus = PHPhotoLibrary.authorizationStatus();

@@ -175,6 +175,26 @@ export let requestPermissions = function () {
     ]);
 };
 
+export let hasCameraPermissions = function () {
+    return new Promise(function (resolve, reject) {
+        if (permissions.hasPermission(android.Manifest.permission.CAMERA)) {
+            resolve(true);
+        } else {
+            resolve(false);
+        }
+    });
+};
+
+export let hasPhotosPermissions = function () {
+    return new Promise(function (resolve, reject) {
+        if (permissions.hasPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            resolve(true);
+        } else {
+            resolve(false);
+        }
+    });
+};
+
 export let requestPhotosPermissions = function () {
     return permissions.requestPermissions([
         android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
