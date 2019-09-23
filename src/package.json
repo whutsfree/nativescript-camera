@@ -1,17 +1,17 @@
 {
-    "name": "nativescript-camera",
+    "name": "nativescript-camera-wf",
     "version": "4.5.0",
     "description": "Provides API for using device camera",
     "repository": {
         "type": "git",
-        "url": "https://github.com/NativeScript/nativescript-camera"
+        "url": "https://github.com/whutsfree/nativescript-camera"
     },
     "main": "camera",
     "typings": "index.d.ts",
     "nativescript": {
         "platforms": {
-            "android": "4.0.0",
-            "ios": "4.0.0"
+          "android": "6.0.0",
+          "ios": "6.0.1"
         }
     },
     "scripts": {
