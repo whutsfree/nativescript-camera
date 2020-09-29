@@ -1,8 +1,8 @@
 import * as types from "@nativescript/core/utils/types";
-import * as imageSourceModule from "@nativescript/core/image-source/image-source";
-import * as imageAssetModule from "@nativescript/core/image-asset/image-asset";
-import * as frameModule from "@nativescript/core/ui/frame/frame";
-import * as trace from "@nativescript/core/trace/trace";
+import * as imageSourceModule from "@nativescript/core/image-source";
+import * as imageAssetModule from "@nativescript/core/image-asset";
+import * as frameModule from "@nativescript/core/ui/frame";
+import * as trace from "@nativescript/core/trace";
 
 class UIImagePickerControllerDelegateImpl extends NSObject implements UIImagePickerControllerDelegate {
     public static ObjCProtocols = [UIImagePickerControllerDelegate];
@@ -82,8 +82,8 @@ class UIImagePickerControllerDelegateImpl extends NSObject implements UIImagePic
                                     }
 
                                 } else {
-                                    trace.write("An error ocurred while saving image to gallery: " +
-                                        err, trace.categories.Error, trace.messageType.error);
+                                    trace.Trace.write("An error ocurred while saving image to gallery: " +
+                                        err, trace.Trace.categories.Error, trace.Trace.messageType.error);
                                 }
                             });
                     } else {
@@ -174,7 +174,7 @@ export let takePicture = function (options): Promise<any> {
 
         imagePickerController.modalPresentationStyle = UIModalPresentationStyle.CurrentContext;
 
-        let frame: typeof frameModule = require("tns-core-modules/ui/frame");
+        let frame: typeof frameModule = require("@nativescript/core/ui/frame");
 
         let topMostFrame = frame.topmost();
         if (topMostFrame) {
@@ -251,8 +251,8 @@ export let requestPhotosPermissions = function () {
             case PHAuthorizationStatus.NotDetermined: {
                 PHPhotoLibrary.requestAuthorization((auth) => {
                     if (auth === PHAuthorizationStatus.Authorized) {
-                        if (trace.isEnabled()) {
-                            trace.write("Application can access photo library assets.", trace.categories.Debug);
+                        if (trace.Trace.isEnabled()) {
+                            trace.Trace.write("Application can access photo library assets.", trace.Trace.categories.Debug);
                         }
                         resolve();
                     } else {
@@ -262,16 +262,16 @@ export let requestPhotosPermissions = function () {
                 break;
             }
             case PHAuthorizationStatus.Authorized: {
-                if (trace.isEnabled()) {
-                    trace.write("Application can access photo library assets.", trace.categories.Debug);
+                if (trace.Trace.isEnabled()) {
+                    trace.Trace.write("Application can access photo library assets.", trace.Trace.categories.Debug);
                 }
                 resolve();
                 break;
             }
             case PHAuthorizationStatus.Restricted:
             case PHAuthorizationStatus.Denied: {
-                if (trace.isEnabled()) {
-                    trace.write("Application can not access photo library assets.", trace.categories.Debug);
+                if (trace.Trace.isEnabled()) {
+                    trace.Trace.write("Application can not access photo library assets.", trace.Trace.categories.Debug);
                 }
                 reject();
                 break;
@@ -300,8 +300,8 @@ export let requestCameraPermissions = function () {
             }
             case AVAuthorizationStatus.Restricted:
             case AVAuthorizationStatus.Denied: {
-                if (trace.isEnabled()) {
-                    trace.write("Application can not access Camera assets.", trace.categories.Debug);
+                if (trace.Trace.isEnabled()) {
+                    trace.Trace.write("Application can not access Camera assets.", trace.Trace.categories.Debug);
                 }
                 reject();
                 break;

@@ -1,4 +1,4 @@
-import imageAsset = require("@nativescript/core/image-asset/image-asset");
+import imageAsset = require("@nativescript/core/image-asset/image-asset-common");
 
 /**
  * Take a photo using the camera.

@@ -1,9 +1,9 @@
 import * as typesModule from "@nativescript/core/utils/types";
 import * as utilsModule from "@nativescript/core/utils/utils";
-import * as applicationModule from "@nativescript/core/application/application";
-import * as imageAssetModule from "@nativescript/core/image-asset/image-asset";
-import * as trace from "@nativescript/core/trace/trace";
-import * as platform from "@nativescript/core/platform/platform";
+import * as applicationModule from "@nativescript/core/application";
+import * as imageAssetModule from "@nativescript/core/image-asset";
+import * as trace from "@nativescript/core/trace";
+import * as platform from "@nativescript/core/platform";
 import * as permissions from "nativescript-permissions";
 
 let REQUEST_IMAGE_CAPTURE = 3453;
@@ -23,8 +23,8 @@ export let takePicture = function (options?): Promise<any> {
                 return;
             }
 
-            let types: typeof typesModule = require("tns-core-modules/utils/types");
-            let utils: typeof utilsModule = require("tns-core-modules/utils/utils");
+            let types: typeof typesModule = require("@nativescript/core/utils/types");
+            let utils: typeof utilsModule = require("@nativescript/core/utils/utils");
 
             let saveToGallery = true;
             let reqWidth = 0;
@@ -61,7 +61,7 @@ export let takePicture = function (options?): Promise<any> {
                 nativeFile = new java.io.File(picturePath);
             }
 
-            let sdkVersionInt = parseInt(platform.device.sdkVersion);
+            let sdkVersionInt = parseInt(platform.Device.sdkVersion);
             if (sdkVersionInt >= 21) {
                 tempPictureUri = FileProviderPackageName.FileProvider.getUriForFile(
                     applicationModule.android.context,
@@ -82,7 +82,7 @@ export let takePicture = function (options?): Promise<any> {
 
             if (takePictureIntent.resolveActivity(utils.ad.getApplicationContext().getPackageManager()) != null) {
 
-                let appModule: typeof applicationModule = require("tns-core-modules/application");
+                let appModule: typeof applicationModule = require("@nativescript/core/application");
 
                 // Remove previous listeners if any
                 appModule.android.off("activityResult");
@@ -96,17 +96,17 @@ export let takePicture = function (options?): Promise<any> {
                             try {
                                 let callback = new android.media.MediaScannerConnection.OnScanCompletedListener({
                                     onScanCompleted: function (path, uri) {
-                                        if (trace.isEnabled()) {
-                                            trace.write(`image from path ${path} has been successfully scanned!`, trace.categories.Debug);
+                                        if (trace.Trace.isEnabled()) {
+                                            trace.Trace.write(`image from path ${path} has been successfully scanned!`, trace.Trace.categories.Debug);
                                         }
                                     }
                                 });
 
                                 android.media.MediaScannerConnection.scanFile(appModule.android.context, [picturePath], null, callback);
                             } catch (ex) {
-                                if (trace.isEnabled()) {
-                                    trace.write(`An error occurred while scanning file ${picturePath}: ${ex.message}!`,
-                                        trace.categories.Debug);
+                                if (trace.Trace.isEnabled()) {
+                                    trace.Trace.write(`An error occurred while scanning file ${picturePath}: ${ex.message}!`,
+                                        trace.Trace.categories.Debug);
                                 }
                             }
                         }
@@ -160,7 +160,7 @@ export let takePicture = function (options?): Promise<any> {
 };
 
 export let isAvailable = function () {
-    let utils: typeof utilsModule = require("tns-core-modules/utils/utils");
+    let utils: typeof utilsModule = require("@nativescript/core/utils/utils");
 
     return utils.ad
         .getApplicationContext()
@@ -233,9 +233,9 @@ let rotateBitmap = function (picturePath, angle) {
         out.flush();
         out.close();
     } catch (ex) {
-        if (trace.isEnabled()) {
-            trace.write(`An error occurred while rotating file ${picturePath} (using the original one): ${ex.message}!`,
-                trace.categories.Debug);
+        if (trace.Trace.isEnabled()) {
+            trace.Trace.write(`An error occurred while rotating file ${picturePath} (using the original one): ${ex.message}!`,
+                trace.Trace.categories.Debug);
         }
     }
 };
