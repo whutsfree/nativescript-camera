@@ -1,9 +1,9 @@
-import * as typesModule from "tns-core-modules/utils/types";
-import * as utilsModule from "tns-core-modules/utils/utils";
-import * as applicationModule from "tns-core-modules/application/application";
-import * as imageAssetModule from "tns-core-modules/image-asset/image-asset";
-import * as trace from "tns-core-modules/trace/trace";
-import * as platform from "tns-core-modules/platform/platform";
+import * as typesModule from "@nativescript/core/utils/types";
+import * as utilsModule from "@nativescript/core/utils/utils";
+import * as applicationModule from "@nativescript/core/application/application";
+import * as imageAssetModule from "@nativescript/core/image-asset/image-asset";
+import * as trace from "@nativescript/core/trace/trace";
+import * as platform from "@nativescript/core/platform/platform";
 import * as permissions from "nativescript-permissions";
 
 let REQUEST_IMAGE_CAPTURE = 3453;
@@ -12,7 +12,7 @@ declare let global: any;
 let useAndroidX = function () {
     return global.androidx && global.androidx.appcompat;
 };
-const FileProviderPackageName = useAndroidX() ? global.androidx.core.content : android.support.v4.content;
+const FileProviderPackageName = useAndroidX() ? global.androidx.core.content : (android.support.v4 as any).content;
 
 export let takePicture = function (options?): Promise<any> {
     return new Promise((resolve, reject) => {

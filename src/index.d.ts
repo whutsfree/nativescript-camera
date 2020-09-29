@@ -1,4 +1,4 @@
-import imageAsset = require("tns-core-modules/image-asset/image-asset");
+import imageAsset = require("@nativescript/core/image-asset/image-asset");
 
 /**
  * Take a photo using the camera.
